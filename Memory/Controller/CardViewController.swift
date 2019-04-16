@@ -15,7 +15,7 @@ class CardViewController: UIViewController {
     
     private var game: Memory!
     
-    private let emojiList = ["🦊", "🐻", "🐼", "🐨", "🦁", "🐯", "🐵", "🦉", "🦇", "🐝", "🦄", "🐷", "🐣", "🐳", "🦋"]
+    private let emojiList = ["🦊", "🐻", "🐼", "🐨", "🦁", "🐯", "🐵", "🦉", "🦇", "🐝", "🦄", "🐷", "🐣", "🐳", "🦋", "🐹", "🌚", "🦞", "🐙", "🐞", "🐧"]
     private var emojiForCards: [String]!
     private var emoji = [Int:String]()
     
@@ -94,7 +94,7 @@ class CardViewController: UIViewController {
     func showCard(_ button: UIButton, _ card: Card) {
         if !cardIsMatched(button) {  // Don't show already matched cards
             button.setTitle(emoji(for: card), for: .normal)
-            button.backgroundColor = #colorLiteral(red: 0, green: 0.5603182912, blue: 0, alpha: 1)
+            button.backgroundColor = #colorLiteral(red: 0, green: 0.5628422499, blue: 0.3188166618, alpha: 1)
         }
     }
     
@@ -125,7 +125,7 @@ class CardViewController: UIViewController {
     }
     
     func addScores(_ card: UIButton) {
-        score += cardIsMatched(card) ? 0 : 1 // don't add scores when tap on matched cards
+        score += cardIsMatched(card) ? 0 : 1 // don't add scores when tap on matched card
         scoreLabel.text = "Score: \(score)"
     }
     

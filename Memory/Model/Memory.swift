@@ -26,8 +26,10 @@ class Memory {
                 cards[index].isMatched = true
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+                UIApplication.shared.beginIgnoringInteractionEvents()
                 self.flipCard(cardButtons, index)
                 self.flipCard(cardButtons, matchIndex)
+                UIApplication.shared.endIgnoringInteractionEvents()
             }
             indexOfFaceUpCard = nil
         } else {
@@ -52,9 +54,7 @@ class Memory {
         cards[index].isFaceUp = false
         card[index].setTitle("", for: .normal)
         card[index].backgroundColor = #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1)
-        UIApplication.shared.beginIgnoringInteractionEvents()
         UIView.transition(with: card[index], duration: 0.3, options: .transitionFlipFromTop, animations: nil, completion: nil)
-         UIApplication.shared.endIgnoringInteractionEvents()
     }
     
     init(numberOfPairsOfCrads: Int) {
