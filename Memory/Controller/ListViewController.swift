@@ -52,7 +52,7 @@ class ListViewController: UIViewController {
     }
     
     func loadScores() {
-        results = realm.objects(UserResults.self).sorted(byKeyPath: "score", ascending: true)
+        results = realm.objects(UserResults.self).sorted(byKeyPath: "gameTime", ascending: true).sorted(byKeyPath: "score", ascending: true) // sort by scores(priority) and by game time
         
         tableView.reloadData()
     }
