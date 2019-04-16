@@ -24,6 +24,8 @@ class CardViewController: UIViewController {
     private var timer = Timer()
     
     private var alert: UIAlertController?
+    private var restartAction: UIAlertAction?
+    private var cancelAction: UIAlertAction?
     
     @IBOutlet var cardButtons: [UIButton]!
     
@@ -48,13 +50,19 @@ class CardViewController: UIViewController {
         
         alert = UIAlertController(title: "U score \(score) points!", message: "Do you want to restart game?", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Restart", style: .default) { (action) in
-            
+        restartAction = UIAlertAction(title: "Restart", style: .default) { action in
+        
             self.newGame()
             
         }
         
-        alert!.addAction(action)
+        cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+            
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        alert!.addAction(restartAction!)
+        alert!.addAction(cancelAction!)
     }
     
     func updateButtons() {
@@ -138,7 +146,7 @@ class CardViewController: UIViewController {
 extension CardViewController {
     
     func addScores(_ card: UIButton) {
-        if !cardIsMatched(card) {
+        if !cardIsMatched(card) {  // don't add scores when tap on matched card
             scoreLabel.text = "Score: \(changeResults(&score))"
         }
     }
