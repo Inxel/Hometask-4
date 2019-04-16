@@ -24,7 +24,9 @@ class ListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         createRandomArray()
-        loadScores()
+        if isResults {
+            loadScores()
+        }
         //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
     
