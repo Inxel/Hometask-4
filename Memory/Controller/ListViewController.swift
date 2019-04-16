@@ -41,9 +41,14 @@ class ListViewController: UIViewController {
             destinationVC.text = isResults ? results?[indexPath.row].score : randomNum[indexPath.row]
             destinationVC.gameTime = isResults ? (results?[indexPath.row].gameTime)! : ""
             destinationVC.date = isResults ? convertDate((results?[indexPath.row].date)!) : ""
-            
         }
         
+    }
+    
+    func convertDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MMM-yyyy\nHH:mm:ss"
+        return formatter.string(from: date)
     }
     
     func loadScores() {
@@ -51,18 +56,13 @@ class ListViewController: UIViewController {
         
         tableView.reloadData()
     }
-    
-    func convertDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return formatter.string(from: date)
-    }
 
 }
 
-
+//MARK: - TableView methods
 
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return isResults ? results!.count : randomNum.count
     }
@@ -80,4 +80,5 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
 }

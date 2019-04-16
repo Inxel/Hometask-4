@@ -124,9 +124,32 @@ class CardViewController: UIViewController {
         return card.backgroundColor == #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     }
     
+    //MARK: - Set timer
+    
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(CardViewController.updateTimer)), userInfo: nil, repeats: true)
+    }
+    
+}
+
+
+//MARK: - Results methods
+
+extension CardViewController {
+    
     func addScores(_ card: UIButton) {
-        score += cardIsMatched(card) ? 0 : 1 // don't add scores when tap on matched card
-        scoreLabel.text = "Score: \(score)"
+        if !cardIsMatched(card) {
+            scoreLabel.text = "Score: \(changeResults(&score))"
+        }
+    }
+    
+    @objc func updateTimer() {
+        timerLabel.text = "Timer: \(changeResults(&seconds))"
+    }
+    
+    func changeResults(_ property: inout Int) -> Int {
+        property = property + 1
+        return property
     }
     
     func resetResults() {
@@ -139,23 +162,8 @@ class CardViewController: UIViewController {
 }
 
 
-//MARK: - Timer methods
+//MARK: - Save methods
 
-extension CardViewController {
-    
-    func runTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(CardViewController.updateTimer)), userInfo: nil, repeats: true)
-    }
-    
-    @objc func updateTimer() {
-        seconds += 1
-        timerLabel.text = "Timer: \(seconds)"
-    }
-    
-}
-
-
-//Mark: - Save methods
 extension CardViewController {
     
     func saveToRealm(_ results: UserResults) {
