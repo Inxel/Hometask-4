@@ -61,6 +61,8 @@ class CardViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
         
+        cancelAction?.setValue(UIColor.red, forKey: "titleTextColor")
+        
         alert!.addAction(restartAction!)
         alert!.addAction(cancelAction!)
     }
